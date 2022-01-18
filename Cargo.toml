@@ -1,0 +1,32 @@
+[package]
+name = "mos-alloc"
+version = "0.1.0-beta.1"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/mrk-its/mos-alloc"
+description = "allocator for mos architecture"
+documentation = "https://docs.rs/mos-alloc"
+keywords = ["llvm-mos", "mos", "alloc", "6502"]
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[dev-dependencies]
+ufmt = "0"
+ufmt-stdio = "0"
+
+[profile.dev]
+lto = true
+opt-level = 1
+
+[profile.release]
+lto = true
+
+[[example]]
+name = "heap"
+
+[patch.crates-io]
+ufmt = {git="https://github.com/mrk-its/ufmt", branch="ptr_width_16_fix"}
+ufmt-write = {git = "https://github.com/mrk-its/ufmt", branch="ptr_width_16_fix"}

@@ -1,0 +1,12 @@
+[build]
+target = "mos-sim-none"
+rustflags = "-C panic=abort"
+
+[unstable]
+build-std = ["core", "alloc"]
+
+[target.mos-sim-none]
+runner = ["mos-sim", "--cycles"]
+
+[target.mos-a800xl-none]
+runner = ["/bin/echo", "can't run"]
