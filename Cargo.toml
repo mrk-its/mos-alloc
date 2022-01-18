@@ -1,11 +1,10 @@
 [package]
 name = "mos-alloc"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/mrk-its/mos-alloc"
 description = "allocator for mos architecture"
-documentation = "https://docs.rs/mos-alloc"
 keywords = ["llvm-mos", "mos", "alloc", "6502"]
 readme = "README.md"
 
