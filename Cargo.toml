@@ -1,31 +1,29 @@
-[package]
-name = "mos-alloc"
-version = "0.1.0"
-edition = "2021"
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/mrk-its/mos-alloc"
-description = "allocator for mos architecture"
-keywords = ["llvm-mos", "mos", "alloc", "6502"]
-readme = "README.md"
+[[example]]
+name = "heap"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[example]]
+name = "realloc"
 
 [dependencies]
+[dev-dependencies.ufmt]
+version = "0"
 
-[dev-dependencies]
-ufmt = "0"
-ufmt-stdio = "0"
+[dev-dependencies.ufmt-stdio]
+version = "0"
 
+[package]
+description = "allocator for mos architecture"
+edition = "2021"
+keywords = ["llvm-mos", "mos", "alloc", "6502"]
+license = "MIT OR Apache-2.0"
+name = "mos-alloc"
+readme = "README.md"
+repository = "https://github.com/mrk-its/mos-alloc"
+resolver = "2"
+version = "0.2.0"
 [profile.dev]
 lto = true
 opt-level = 1
 
 [profile.release]
 lto = true
-
-[[example]]
-name = "heap"
-
-[patch.crates-io]
-ufmt = {git="https://github.com/mrk-its/ufmt", branch="ptr_width_16_fix"}
-ufmt-write = {git = "https://github.com/mrk-its/ufmt", branch="ptr_width_16_fix"}

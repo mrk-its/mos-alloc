@@ -3,8 +3,6 @@
 Allocator for `mos-unknown-none` target (https://github.com/mrk-its/rust/tree/mos_target)
 and number of utilities for setting max heap size / checking free / used memory
 
-
-
 ## API Docs
 https://docs.rs/mos-alloc
 

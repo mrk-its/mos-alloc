@@ -1,10 +1,10 @@
 #![no_std]
 use core::alloc::GlobalAlloc;
-
 pub struct MosAllocator;
 
 extern "C" {
     fn malloc(n: usize) -> *mut u8;
+    fn realloc(ptr: *mut u8, n: usize) -> *mut u8;
     fn free(ptr: *mut u8);
     fn __heap_bytes_free() -> usize;
     fn __heap_bytes_used() -> usize;
@@ -33,6 +33,15 @@ unsafe impl GlobalAlloc for MosAllocator {
 
     unsafe fn dealloc(&self, ptr: *mut u8, _layout: core::alloc::Layout) {
         free(ptr);
+    }
+
+    unsafe fn realloc(
+        &self,
+        ptr: *mut u8,
+        _layout: core::alloc::Layout,
+        new_size: usize,
+    ) -> *mut u8 {
+        realloc(ptr, new_size)
     }
 }
 

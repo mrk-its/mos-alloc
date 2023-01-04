@@ -17,8 +17,16 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 
+static DATA: &str = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
+
 #[start]
 fn main(_argc: isize, _argv: *const *const u8) -> isize {
+    // reserve small amount of memory for heap
+    // (32 bytes for vec data + some overhead)
+    // it will fail if true realloc is not available
+
+    mos_alloc::set_limit(50);
+
     let initial_bytes_free = mos_alloc::bytes_free();
     println!(
         "heap bytes free: {} / {}",
@@ -27,22 +35,13 @@ fn main(_argc: isize, _argv: *const *const u8) -> isize {
     );
 
     {
-        let text = String::from("foo");
-        println!(
-            "allocated string {}, free: {}",
-            &text[..],
-            mos_alloc::bytes_free()
-        );
-        {
-            let data = (0..50u16).collect::<Vec<_>>();
-            println!(
-                "allocated vec: {:?}, free: {}",
-                &data[..],
-                mos_alloc::bytes_free()
-            );
-        }
+        let vec = DATA
+            .split(",")
+            .map(|i| i.parse::<i16>().unwrap())
+            .collect::<Vec<_>>();
+        println!("allocated, free: {}", mos_alloc::bytes_free());
     }
     assert!(mos_alloc::bytes_free() == initial_bytes_free);
-    println!("deallocated");
+    println!("deallocated, free: {}", mos_alloc::bytes_free());
     0
 }
